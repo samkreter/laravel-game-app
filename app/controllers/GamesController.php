@@ -6,8 +6,9 @@ class GamesController extends BaseController
 {
     public function index()
     {
-        // Show a listing of games.
-        return View::make('index');
+         // Show a listing of games.
+	    $games = Game::all();
+	    return View::make('index', compact('games'));
     }
 
     public function create()
@@ -18,7 +19,12 @@ class GamesController extends BaseController
 
     public function handleCreate()
     {
-        // Handle create form submission.
+         // Handle create form submission.
+        $game = new Game;
+        $game->title = Input::get('title');
+        $game->publisher = Input::get('publisher');
+        $game->complete = Input::has('complete');
+        $game->save();
     }
 
     public function edit(Game $game)
