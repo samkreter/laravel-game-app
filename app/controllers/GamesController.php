@@ -47,18 +47,19 @@ class GamesController extends BaseController
         return Redirect::action('GamesController@index');
     }
 
-    public function delete()
+    public function delete(Game $game)
+    {
+      // Show delete confirmation page.
+        return View::make('delete', compact('game'));
+    }
+
+    public function handleDelete()
     {
         // Handle the delete confirmation.
         $id = Input::get('game');
         $game = Game::findOrFail($id);
         $game->delete();
 
-    return Redirect::action('GamesController@index');
-    }
-
-    public function handleDelete()
-    {
-        // Handle the delete confirmation.
+        return Redirect::action('GamesController@index');
     }
 }
