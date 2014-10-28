@@ -7,7 +7,7 @@
 
     <div class="panel panel-default">
         <div class="panel-body">
-            <a href="{{ action('GamesController@create', $game->id) }}" class="btn btn-primary">Create Game</a>
+            <a href="{{ action('GamesController@create') }}" class="btn btn-primary">Create Game</a>
         </div>
     </div>
 

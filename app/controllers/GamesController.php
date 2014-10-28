@@ -25,23 +25,36 @@ class GamesController extends BaseController
         $game->publisher = Input::get('publisher');
         $game->complete = Input::has('complete');
         $game->save();
+
+        return Redirect::action('GamesController@index');
     }
 
     public function edit(Game $game)
     {
         // Show the edit game form.
-        return View::make('edit');
+         return View::make('edit', compact('game'));
     }
 
     public function handleEdit()
     {
         // Handle edit form submission.
+        $game = Game::findOrFail(Input::get('id'));
+        $game->title        = Input::get('title');
+        $game->publisher    = Input::get('publisher');
+        $game->complete     = Input::has('complete');
+        $game->save();
+
+        return Redirect::action('GamesController@index');
     }
 
     public function delete()
     {
-        // Show delete confirmation page.
-        return View::make('delete');
+        // Handle the delete confirmation.
+        $id = Input::get('game');
+        $game = Game::findOrFail($id);
+        $game->delete();
+
+    return Redirect::action('GamesController@index');
     }
 
     public function handleDelete()
